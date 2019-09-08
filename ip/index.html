@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+<head>
+<title>External IP Tool</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+    body {
+        font-family: monospace;
+        background-color: #181818; 
+        color: #bfbfbf;
+        text-align: center;
+        margin-top: 25px;
+    }
+    
+    .refresh {
+        color: #bfbfbf;
+        cursor: pointer;
+        font-size: 20px;
+    }
+    
+    b {
+        font-size: 25px;
+    }
+    
+    div {
+        background-color: #78e08f;
+        color: #0b0b0b;
+        max-width: 600px;
+        font-weight: 100;
+        font-size: 25px;
+        margin: 25px auto;
+        padding: 10px;
+    }   
+</style>
+<script type="application/javascript">
+    function getIP(json) {
+        if (json.ip == "") {
+            document.getElementById("v4box").style.backgroundColor = "#e07e78";
+            document.write("- None -");
+        }
+        else document.write(json.ip);
+    }
+    
+    function getIP6(json) {
+        if (json.ip.includes(":")) {
+            document.write(json.ip);
+        }
+        else {
+            document.getElementById("v6box").style.backgroundColor = "#fdfd96";
+            document.write("- None -");
+        }
+    }
+</script>
+</head>
+<body>
+    
+<h1>Your IP is...</h1><hr>
+    
+<div id="v4box">
+    <script type="application/javascript" src="https://api.ipify.org?format=jsonp&callback=getIP"></script>
+    <br><br>IPv4
+    </div>
+
+<div id="v6box">
+    <script type="application/javascript" src="https://api6.ipify.org?format=jsonp&callback=getIP6"></script>
+    <br><br>IPv6
+    </div>
+<span class="refresh" onClick="window.location.reload();">&#x21bb;</span>
+</body>
+</html>
